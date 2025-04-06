@@ -1,14 +1,26 @@
 import { Child } from "./Child";
-import { useStore } from "./store";
+import { useLazyGetTodosQuery } from "./store";
 
 function App() {
-  const { inc, dec } = useStore();
+  const [getTodos, { data, error, isLoading, }] = useLazyGetTodosQuery();
+  console.log(data);
 
   return (
     <>
-      <button onClick={inc}>Increment</button>
-      <button onClick={dec}>Decrement</button>
-      <Child />
+      <button
+        onClick={() => {
+          getTodos();
+        }}
+      >
+        Get Todos
+      </button>
+      {/* <h1>Loading...</h1> */}
+      {isLoading ? (
+        <h1>Loading...</h1>
+      ) : (
+        data?.map((todo) => <div>{todo.title}</div>)
+      )}
+      {/* <Child /> */}
     </>
   );
 }

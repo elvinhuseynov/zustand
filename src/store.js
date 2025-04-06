@@ -1,7 +1,16 @@
-import { create } from "zustand";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const useStore = create((set) => ({
-  count: 1,
-  inc: () => set((state) => ({ count: state.count + 1 })),
-  dec: () => set((state) => ({ count: state.count - 1 })),
-}));
+export const api = createApi({
+  reducerPath: "api",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://jsonplaceholder.typicode.com",
+  }),
+  endpoints: (build) => ({
+    getTodos: build.query({
+      query: () => "/todos",
+      
+    }),
+  }),
+});
+
+export const { useGetTodosQuery, useLazyGetTodosQuery } = api;

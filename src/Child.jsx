@@ -1,7 +1,7 @@
-import { useStore } from "./store";
+
 
 export const Child = () => {
-  const { count } = useStore();
+
   return (
     <div
       style={{
@@ -10,7 +10,7 @@ export const Child = () => {
         alignItems: "center",
       }}
     >
-      {count}
+
     </div>
   );
 };
